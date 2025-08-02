@@ -13,9 +13,19 @@
         <input type="checkbox" name="terminos" value="aceptar"> Acepto los términos y condiciones<br>
         <input type="submit" value="Enviar">
     </form>
+
+    <!-- Nueva barra de escritura -->
+    <form id="formMatilde" style="margin-top:20px;">
+        <input type="text" id="inputMatilde" placeholder="Escribe algo..." autocomplete="off">
+        <button type="submit">Enviar</button>
+    </form>
+
     <!-- Agrega SweetAlert2 desde CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Agrega Howler.js para reproducir audio fácilmente -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <script>
+        // Lógica para el formulario de términos
         document.getElementById('miFormulario').addEventListener('submit', function(e) {
             e.preventDefault();
             const checkbox = document.querySelector('input[name="terminos"]');
@@ -30,6 +40,31 @@
                     icon: 'warning',
                     title: 'No pues así',
                     text: 'Olvidaste aceptar los términos y condiciones >:v'
+                });
+            }
+        });
+
+        // Lógica para el formulario de Matilde
+        document.getElementById('formMatilde').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const valor = document.getElementById('inputMatilde').value.trim().toLowerCase();
+            if (valor === 'matilde') {
+                // Declarar la variable sound fuera de Swal.fire para poder detenerla después
+                var sound = new Howl({
+                    src: ['Accumula Town - Pokémon Black & Pokémon White (OST).mp3'], // Usa el archivo local de audio
+                    html5: true,
+                    volume: 1
+                });
+                sound.play();
+
+                Swal.fire({
+                    title: '¡PITOOOOO!',
+                    imageUrl: 'https://images.cults3d.com/OZJUQwV0Y81fCRuFTVqyT7y2BNU=/516x516/filters:no_upscale()/https://fbi.cults3d.com/uploaders/14114267/illustration-file/61160420-1544-493e-991b-de4bb36e4e36/Pene%20kwaii%203.jpg',
+                    imageHeight: 300,
+                    showConfirmButton: true,
+                    confirmButtonText: 'Cerrar'
+                }).then(() => {
+                    sound.stop();
                 });
             }
         });
