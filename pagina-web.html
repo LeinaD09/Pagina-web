@@ -3,13 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pagina equisde</title>
 </head>
 <body>
     Mi primera página web
     <h1>Bienvenido a mi página web</h1>
-    <form action="pagina-web.html" method="post">
+    <form id="miFormulario" action="pagina-web.html" method="post">
         <input type="checkbox" name="terminos" value="aceptar"> Acepto los términos y condiciones<br>
-        
+        <input type="submit" value="Enviar">
+    </form>
+    <!-- Agrega SweetAlert2 desde CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById('miFormulario').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const checkbox = document.querySelector('input[name="terminos"]');
+            if (checkbox.checked) {
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Felicidades!',
+                    text: 'Ahora vamos a recuperar el imperio romano y a hacerlo más grande que antes 🤗'
+                });
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'No pues así',
+                    text: 'Olvidaste aceptar los términos y condiciones >:v'
+                });
+            }
+        });
+    </script>
 </body>
 </html>
